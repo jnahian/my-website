@@ -31,7 +31,7 @@ class ProfileController extends Controller
 
         $updateData = $request->except(['photo', 'cv']);
 
-        if($photo = $request->get('photo')){
+        if($photo = $request->get('photo') && $request->isNewPhoto){
             $upload = Utility::base64FileUpload($photo, 'profile');
 
             if($upload['status']) {

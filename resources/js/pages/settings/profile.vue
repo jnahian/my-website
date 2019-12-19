@@ -92,6 +92,7 @@
             <div class="form-group row">
                 <label class="col-md-3 col-form-label text-md-right">{{ $t('Photo') }} </label>
                 <div class="col-md-7">
+                    <input type="hidden" v-model="form.isNewPhoto" name="isNewPhoto">
                     <div v-if="!form.photo">
                         <input type="file" :class="{ 'is-invalid': form.errors.has('photo') }" @change="onFileChange" class="btn btn-outline-primary">
                     </div>
@@ -145,10 +146,11 @@
                 cv: '',
                 dob: new Date(),
                 gender: '',
+                isNewPhoto: null
             }),
             dateOptions: {
                 format: 'YYYY-MM-DD',
-                useCurrent: false,
+                useCurrent: true,
             }
         }),
 
@@ -182,6 +184,7 @@
 
                 reader.onload = (e) => {
                     vm.form.photo = e.target.result;
+                    vm.form.isNewPhoto = true
                 };
                 reader.readAsDataURL(file);
             },
