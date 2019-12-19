@@ -4,6 +4,7 @@ namespace App;
 
 use App\Notifications\VerifyEmail;
 use App\Notifications\ResetPassword;
+use Carbon\Carbon;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -19,7 +20,7 @@ class User extends Authenticatable implements JWTSubject //, MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'designation', 'father_name', 'mother_name', 'mobile', 'dob', 'gender', 'photo', 'cv', 'objective'
     ];
 
     /**
@@ -38,6 +39,7 @@ class User extends Authenticatable implements JWTSubject //, MustVerifyEmail
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'dob'               => 'date'
     ];
 
     /**
@@ -56,7 +58,7 @@ class User extends Authenticatable implements JWTSubject //, MustVerifyEmail
      */
     public function getPhotoUrlAttribute()
     {
-        return 'https://www.gravatar.com/avatar/'.md5(strtolower($this->email)).'.jpg?s=200&d=mm';
+        return 'https://www.gravatar.com/avatar/' . md5(strtolower($this->email)) . '.jpg?s=200&d=mm';
     }
 
     /**
@@ -72,7 +74,7 @@ class User extends Authenticatable implements JWTSubject //, MustVerifyEmail
     /**
      * Send the password reset notification.
      *
-     * @param  string  $token
+     * @param string $token
      * @return void
      */
     public function sendPasswordResetNotification($token)
@@ -104,5 +106,19 @@ class User extends Authenticatable implements JWTSubject //, MustVerifyEmail
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    public function setDobAttribute($value)
+    {
+        $this->attributes['dob'] = Carbon::parse($value)->toDateString();
+    }
+
+    public function getPhotoAttribute($value = null)
+    {
+        if ($value) {
+            if (file_exists($value)) return asset($value);
+        }
+
+        return false;
     }
 }

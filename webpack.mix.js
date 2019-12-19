@@ -35,6 +35,12 @@ mix.webpackConfig({
   }
 })
 
+mix.autoload({
+  'jquery': ['$', 'window.jQuery', 'jQuery'],
+  'vue': ['Vue','window.Vue'],
+  'moment': ['moment','window.moment'],
+})
+
 mix.then(() => {
   if (!mix.config.hmr) {
     process.nextTick(() => publishAseets())

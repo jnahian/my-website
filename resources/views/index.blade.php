@@ -14,7 +14,15 @@ $config = [
 
   <title>{{ config('app.name') }}</title>
 
+  <link href="https://fonts.googleapis.com/css?family=Crimson+Text&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ mix('dist/css/app.css') }}">
+  <style>
+    html, body {
+      font-family: 'Crimson Text', serif !important;
+      font-size: 1.2rem;
+      letter-spacing: 1px;
+    }
+  </style>
 </head>
 <body>
   <div id="app"></div>

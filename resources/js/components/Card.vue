@@ -1,8 +1,8 @@
 <template>
-  <div class="card">
-    <div v-if="title" class="card-header">
+  <div class="card border-primary">
+    <h5 v-if="title" class="card-header text-primary">
       {{ title }}
-    </div>
+    </h5>
 
     <div class="card-body">
       <slot />

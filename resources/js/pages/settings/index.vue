@@ -34,6 +34,11 @@ export default {
           route: 'settings.profile'
         },
         {
+          icon: 'book',
+          name: this.$t('objective'),
+          route: 'settings.objective'
+        },
+        {
           icon: 'lock',
           name: this.$t('password'),
           route: 'settings.password'

@@ -21,6 +21,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     });
 
     Route::patch('settings/profile', 'Settings\ProfileController@update');
+    Route::patch('settings/objective', 'Settings\ProfileController@updateObjective');
     Route::patch('settings/password', 'Settings\PasswordController@update');
 });
 
